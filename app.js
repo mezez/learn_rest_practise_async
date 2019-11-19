@@ -52,7 +52,7 @@ app.use((error, req, res, next) => {
 
 ;
 
-//mongoose.connect('mongodb+srv://mez:incorrect94@learn-zuf6u.mongodb.net/social', {useNewUrlParser: true, useUnifiedTopology: true})
+
 mongoose.connect('mongodb://localhost/social', { useNewUrlParser: true, useUnifiedTopology: true })
     .then(result => {
         //app.listen(8080); //commented out because server is need for the socket io function 
