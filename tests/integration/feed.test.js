@@ -5,19 +5,19 @@ const jwt = require('jsonwebtoken');
 
 
 let server;
-
-const  token = jwt.sign(
-    {}, 
-    'somesupersecretsecret', 
-    {expiresIn: '1h'});
+let token;
 
 describe('/feed', () => {
     beforeEach(() => {
         server = require('../../app');
+        token = jwt.sign(
+            {}, 
+            'somesupersecretsecret', 
+            {expiresIn: '1h'});
     })
     afterEach(async () => {
-        server.close();
         await Post.remove({});
+        server.close();
     })
     describe('GET /posts', () => {
         it('should return all posts', async () => {
@@ -60,7 +60,7 @@ describe('/feed', () => {
             expect(res.status).toBe(200);
             expect(res.body.post._id).toBeDefined();
             expect(res.body.post._id).toMatch(postId);
-            expect(res.body.post).toHaveProperty('title',post.title);
+            expect(res.body.post).toHaveProperty('title',post.title); //not compulsory to set the value of the property
         });
 
         it('should return 404 if no post is found, given invalid id', async () => {
